@@ -111,6 +111,7 @@ static class Extensions
 	}
 	static public void DrawFullscreenQuad (this Material mat, int pass = 0, float z=1.0f)
 	{
+		GL.PushMatrix ();
 		mat.SetPass (pass);
 		GL.Begin (GL.QUADS);
 		GL.Vertex3 (-1.0f, -1.0f, z);
@@ -123,5 +124,6 @@ static class Extensions
 		GL.Vertex3 (1.0f, -1.0f, z);
 		GL.Vertex3 (-1.0f, -1.0f, z);
 		GL.End ();
+		GL.PopMatrix ();
 	}
 }

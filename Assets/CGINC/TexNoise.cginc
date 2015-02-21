@@ -14,7 +14,7 @@ half4 tnoise(half3 v)
 }
 
 half3 tnoise3D(half3 v, int i = 1, half t = 0){
-	i = min(3,max(0,i));
+	i = min(3.0,max(0.0,(float)i));
 	half3 n = half3(
 		tnoise(half3(v.x+t,v.y,v.z))[i],
 		tnoise(half3(v.y,v.z+t,v.x))[i],

@@ -1,7 +1,6 @@
 ﻿using UnityEngine;
 using System.Collections;
 
-[ExecuteInEditMode]
 public class MeshParticle : MonoBehaviour
 {
 	public Mesh originalMesh;
@@ -26,7 +25,6 @@ public class MeshParticle : MonoBehaviour
 	void Update ()
 	{
 		Matrix4x4 matrix = transform.localToWorldMatrix;
-//		foreach (var mat in mats)
 		for (var i = 0; i < mats.Length; i++) {
 			mats [i].SetInt ("_Offset", i * numParticles);
 			Graphics.DrawMesh (particleMesh, matrix, mats [i], 0);
