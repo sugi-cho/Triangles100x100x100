@@ -21,6 +21,7 @@ public class ParticleUpdater : MonoBehaviour
 		rotTex = new RenderTexture[2],
 		posTex = new RenderTexture[2];
 	float mouseTime, waitCouter;
+	Vector3 mPos;
 
 	void SwapRts (RenderTexture[] rts)
 	{
@@ -77,25 +78,30 @@ public class ParticleUpdater : MonoBehaviour
 		if (Input.GetMouseButtonDown (0)) {
 			mouseTime = 0;
 			if (waitCouter > 0) {
+				transform.rotation = Quaternion.identity;
+				transform.position = Vector3.zero;
 				Shader.SetGlobalFloat (PropMouseTime, mouseTime);
 				WriteRenderBuffers (updateMat, 0);
 			}
 			waitCouter = 0;
 		}
 		if (Input.GetMouseButton (0)) {
-			var pos = Input.mousePosition;
-			pos.z = 40f;
-			pos = Camera.main.ScreenToWorldPoint (pos);
-			Shader.SetGlobalVector (PropMousePos, pos);
+			mPos = Input.mousePosition;
+			mPos.z = 40f;
+			mPos = Camera.main.ScreenToWorldPoint (mPos);
+			Shader.SetGlobalVector (PropMousePos, mPos);
 			mouseTime += Time.deltaTime;
 			WriteRenderBuffers (updateMat, 1);
 		} else if (Input.GetMouseButtonUp (0)) {
 			if (mouseTime > 20f)
-				waitCouter = 10f;
+				waitCouter = 30f;
 		} else {
-			if (waitCouter > 0)
+			if (waitCouter > 0) {
 				WriteRenderBuffers (updateMat, 2);
-			else {
+				transform.RotateAround (mPos / 5f, Vector3.up, Time.deltaTime);
+			} else {
+				transform.rotation = Quaternion.identity;
+				transform.position = Vector3.zero;
 				mouseTime = 0;
 				WriteRenderBuffers (updateMat, 0);
 			}

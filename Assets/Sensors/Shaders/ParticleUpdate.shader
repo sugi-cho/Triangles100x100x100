@@ -102,13 +102,11 @@
 		
 		pOut frag_show(v2f i){
 			float4
-				color = float4(0.5,0.5,0.5,0),
+				color = tex2D(_ColTex, i.uv),
 				velocity = 0,
-				rotation = float4(0,0,0,1),
-				position = float4(spherePos(i.uv),0);
+				rotation = tex2D(_RotTex, i.uv),
+				position = tex2D(_PosTex, i.uv);
 			
-			position.y += 1000;
-			rotation = fromToRotation(float3(0,1,0), position.xyz);
 			
 			pOut o;
 			o.color = color;

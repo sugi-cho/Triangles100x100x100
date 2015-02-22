@@ -64,6 +64,7 @@ public class MeshParticle : MonoBehaviour
 		particleMesh.uv2 = uv2;
 		particleMesh.SetIndices (indices, MeshTopology.Triangles, 0);
 		particleMesh.hideFlags = HideFlags.HideAndDontSave;
+		particleMesh.bounds = new Bounds (Vector3.zero, Vector3.one * 100f);
 	}
 
 	void OnDisable ()

@@ -23,7 +23,7 @@
 				c = tex2D(_Canvas, i.uv),
 				m = tex2D(_Mask, i.uv);
 			
-			c.rgb = lerp(c.rgb,p.rgb,p.a*_P*unity_DeltaTime.z*saturate(_MouseTime*0.1)+m.r*saturate(_MouseTime*0.1-2.0));
+			c.rgb = lerp(c.rgb,p.rgb,p.a*_P*(unity_DeltaTime.z*saturate(_MouseTime*0.1)+m.r*saturate(_MouseTime*0.1-2.0)));
 			c.a = 0;
 			return lerp(c,_BC,saturate(1-_MouseTime));
 		}
